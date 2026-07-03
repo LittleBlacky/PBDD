@@ -2,102 +2,200 @@
 
 [中文](README.md) | English
 
-**PBDD (Project Brain Driven Development) is an open specification for helping AI agents maintain project state, execute engineering workflows, and produce durable engineering artifacts through a shared protocol.**
-
-> **Core belief: AI shouldn't remember conversations. AI should remember projects.**
->
-> PBDD moves durable memory out of chat history and into the project itself, where it can be read, evolved, validated, and shared by any conforming agent.
-
-PBDD is not a code framework. It is closer to Kubernetes, Dockerfile, OpenAPI, or MCP: it defines protocols, states, conventions, and artifact boundaries that different runtimes and agents can implement.
-
-## Positioning
-
-PBDD consists of four core parts:
+## Project Brain Driven Development
 
 ```text
-PBDD
-  ├── Protocol   # Events, lifecycles, workflows, artifact contracts
-  ├── Brain      # Project state database
-  ├── Workflow   # Engineering process and state transitions
-  └── Artifacts  # Specs, ADRs, tasks, reviews, releases, and more
+AI shouldn't remember conversations.
+AI should remember projects.
 ```
 
-In short:
+Turn any AI Agent into a persistent software engineer by giving it a Project Brain.
+
+<p align="center">
+  <img src="docs/assets/pbdd-flow.svg" alt="PBDD turns requests into project memory and engineering workflow" width="820">
+</p>
+
+## Why PBDD?
+
+Today, AI software development usually looks like this:
 
 ```text
-Event -> Brain -> Workflow -> Artifacts
+You
+  -> "Implement Login"
+  -> AI writes code
 ```
 
-A user expresses intent. A runtime interprets it as an event. The event drives workflow transitions. The Brain records project state. Artifacts hold durable engineering output.
+Then tomorrow:
 
-## Why It Is Not a Framework
+```text
+New Chat
+  -> "Continue"
+  -> AI: "Can you explain your project?"
+```
 
-Traditional frameworks usually bind application structure, runtime dependencies, and extension points together. PBDD does not.
+Every conversation starts from zero.
 
-PBDD defines:
+Your project has memory.
 
-- Project manifest: `pbdd.yaml`
-- Project state model: Brain
-- Event protocol
-- Lifecycle protocol
-- Workflow state machines
-- Engineering artifact contracts
-- Project directory conventions
+Your AI doesn't.
 
-PBDD does not define:
+PBDD changes that. It moves durable memory out of chat history and into the project itself.
 
-- Agent prompts
-- IDE plugin behavior
-- Business application structure
-- A specific programming language or framework
-- Vendor-specific AI platform features
+## The Shift
 
-## Repository Layout
+Traditional AI coding:
 
-This workspace is split into three independently maintainable projects:
+```text
+Chat -> Context -> Code
+```
+
+PBDD:
+
+```text
+Event -> Project Brain -> Workflow -> Engineering -> Code
+```
+
+Conversations are temporary.
+
+Projects are permanent.
+
+## How It Works
+
+PBDD turns every user request into an engineering event.
+
+```text
+User: Add refund support.
+
+Agent:
+  [1] Detect Feature Event
+  [2] Update Project Brain
+  [3] Analyze Impact
+  [4] Update Specification
+  [5] Create Tasks
+  [6] Implement
+  [7] Test
+  [8] Update Brain
+```
+
+The result is not just code. The result is a project that knows what changed, why it changed, what remains risky, and what should happen next.
+
+## Architecture
+
+```text
+                 User
+                  |
+                  v
+            Project Agent
+                  |
+                  v
+          PBDD Skill Runtime
+                  |
+                  v
+             Project Brain
+                  |
+  ---------------------------------
+  Workflow   Knowledge   State
+  Spec       Tasks       History
+  Risks      Decisions   Health
+  ---------------------------------
+                  |
+                  v
+              Source Code
+```
+
+PBDD is not the agent. PBDD is the project memory and engineering protocol that any agent can follow.
+
+## The Brain
+
+```text
+Project Brain
+  |-- Features
+  |-- Tasks
+  |-- Knowledge
+  |-- Architecture
+  |-- Risks
+  |-- Timeline
+  |-- Decisions
+  `-- Health
+```
+
+Everything the project needs to remember lives here.
+
+Not in a hidden chat.
+
+Not in a vendor account.
+
+Not in one agent's private context.
+
+## Demo First
+
+Give an agent a PBDD project and say:
+
+```text
+Add refund support.
+```
+
+A PBDD-aware agent should know the engineering move:
+
+```text
+[ok] Create a Feature Event
+[ok] Update the Project Brain
+[ok] Analyze affected specs and code
+[ok] Create implementation tasks
+[ok] Execute the workflow
+[ok] Test the change
+[ok] Record decisions, risks, and progress
+```
+
+The next agent can continue from the project, not from your memory.
+
+## Principles
+
+```text
+Everything starts with an Event.
+
+Project Brain is the source of truth.
+
+Agents maintain engineering.
+
+Humans maintain business intent.
+
+Workflow over Prompt.
+
+Projects over Conversations.
+```
+
+## Getting Started
+
+```bash
+git clone https://github.com/LittleBlacky/PBDD.git
+cd PBDD
+```
+
+Copy the starter into a new project:
+
+```bash
+cp -r pbdd-starter ../my-project
+```
+
+Then ask your agent:
+
+```text
+Boot this PBDD project.
+```
+
+That's the experience PBDD is designed for.
+
+## Repository
 
 ```text
 PBDD/
-  ├── pbdd-spec/      # Specification: source of truth
-  ├── pbdd-skill/     # Runtime: agent implementation
-  └── pbdd-starter/   # Starter: project template
+  pbdd-spec/      # the open specification
+  pbdd-skill/     # the agent runtime implementation
+  pbdd-starter/   # the project template
 ```
 
-### `pbdd-spec/`
-
-The source of truth for the PBDD specification.
-
-It defines:
-
-- Event types
-- Brain data model
-- Workflow lifecycles
-- Artifact schemas
-- Project manifest: `pbdd.yaml`
-- Conformance rules
-
-The specification should be machine-readable first. `schemas/` and `workflow/` are normative. Markdown documents explain intent and usage.
-
-### `pbdd-skill/`
-
-The PBDD Agent Runtime implementation.
-
-It is responsible for:
-
-- Reading `pbdd.yaml`
-- Loading the PBDD Spec
-- Reading and maintaining the Brain
-- Executing Workflow state transitions
-- Creating or updating Artifacts
-- Providing adapters for different agents or IDEs
-
-A runtime may contain prompts, scripts, adapters, and tests, but it must not redefine the specification.
-
-### `pbdd-starter/`
-
-A PBDD project template.
-
-It contains the minimal structure a real project needs:
+A PBDD project looks like this:
 
 ```text
 project/
@@ -108,148 +206,58 @@ project/
   tests/
 ```
 
-The starter is a consumer of the specification. It must not contain protocol or workflow definitions.
+The README is the vision. The details live in the spec and docs.
 
-## Dependency Direction
-
-```text
-pbdd-spec
-  -> pbdd-skill
-  -> pbdd-starter
-  -> user project
-```
-
-The dependency direction must not be reversed.
-
-- The Spec does not depend on the Skill.
-- The Skill implements the Spec.
-- The Starter consumes the Spec and Skill.
-- User projects copy the Starter and grow their own Brain and Artifacts.
-
-## What Is the Brain?
-
-The Brain is project state, not ordinary documentation.
-
-Recommended layout:
+## Ecosystem
 
 ```text
-brain/
-  project.md
-  feature/
-  task/
-  risk/
-  decision/
-  knowledge/
-  timeline/
-  health/
+PBDD Specification
+        |
+        v
+PBDD Runtime / Skill
+        |
+        v
+Agent
+        |
+        v
+Project
 ```
 
-Example:
+PBDD should not belong to one AI tool.
+
+Claude, Cursor, ChatGPT, Codex, local agents, CI agents, and future IDEs should all be able to follow the same project brain.
+
+## Roadmap
 
 ```text
-Feature: Coupon
-Status: Implementing
-Owner: Agent
-Progress: 60%
-Tasks: TASK-22, TASK-23
+[x] Project Brain
+[x] Workflow model
+[x] Event model
+[x] Codex Skill runtime
+[x] Starter project
+[ ] Multi-agent workflow
+[ ] Enterprise Brain
+[ ] Cloud sync
+[ ] IDE plugin
+[ ] Visual workflow
+[ ] Conformance test suite
 ```
 
-Markdown is only the current storage format. Semantically, the Brain is the Project Database.
+## Manifesto
 
-## What Is a Workflow?
+Software engineering is not about generating code.
 
-A Workflow is a state transition system, not a prompt.
+It is about evolving projects.
 
-Example Feature lifecycle:
+PBDD teaches AI how to evolve software.
+
+Projects should have memory.
+
+Agents should have discipline.
+
+Engineering should become autonomous.
 
 ```text
-Draft -> Planning -> Implementing -> Testing -> Done
+The future isn't AI writing code.
+The future is AI owning software engineering.
 ```
-
-All agents should follow the same state machine. A runtime reads workflow definitions and applies valid transitions.
-
-## What Are Artifacts?
-
-Artifacts are engineering outputs, not Brain state.
-
-Common artifacts include:
-
-- Spec
-- ADR
-- Task
-- Review
-- Release note
-- Knowledge note
-- Test evidence
-- Code
-
-The Brain records current state and indexes. Artifacts preserve reviewable, deliverable, and traceable engineering content.
-
-## Quick Start
-
-Copy the starter:
-
-```powershell
-Copy-Item -Recurse pbdd-starter my-project
-```
-
-Enter the project:
-
-```powershell
-Set-Location my-project
-```
-
-Edit:
-
-```text
-pbdd.yaml
-brain/project.md
-```
-
-Then ask a PBDD-capable agent runtime to read the project:
-
-```text
-Use PBDD to inspect the project manifest, update brain state, run the appropriate workflow, and maintain engineering artifacts.
-```
-
-## Current Version
-
-Current specification draft:
-
-```text
-0.1.0
-```
-
-Current status:
-
-- `pbdd-spec/`: initial specification draft
-- `pbdd-skill/`: initial Codex Skill runtime
-- `pbdd-starter/`: minimal project template
-
-## Commit Convention
-
-This repository uses Conventional Commits.
-
-Common types:
-
-- `feat`: new capability
-- `fix`: bug fix
-- `docs`: documentation update
-- `refactor`: behavior-preserving restructure
-- `chore`: repository maintenance, configuration, housekeeping
-- `test`: test changes
-- `ci`: automation and CI configuration
-
-See [docs/commit-convention.md](docs/commit-convention.md) for details.
-
-## Design Principles
-
-- The Spec is the source of truth, the Runtime is the implementation, and the Project is the consumer.
-- Machine-readable rules come first; Markdown explains them.
-- The Brain maintains state; Artifacts hold deliverables.
-- Prompts are not part of the core protocol.
-- PBDD is not bound to any agent, IDE, language, or platform.
-
-## License
-
-No license has been declared yet.

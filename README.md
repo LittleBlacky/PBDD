@@ -2,102 +2,202 @@
 
 中文 | [English](README.en.md)
 
-**PBDD（Project Brain Driven Development）是一套开放规范，用于让 AI Agent 以统一协议维护项目状态、执行工程流程并生成工程产物。**
-
-> **核心理念：AI shouldn't remember conversations. AI should remember projects.**
->
-> PBDD 的目标不是让 AI 记住一次次对话，而是让项目自己拥有可读取、可演进、可验证的长期记忆。
-
-PBDD 不定位为代码框架。它更接近 Kubernetes、Dockerfile、OpenAPI 或 MCP 这类工程规范：定义协议、状态、约定和产物边界，由不同 Runtime 或 Agent 实现。
-
-## 核心定位
-
-PBDD 由四个核心部分组成：
+## Project Brain Driven Development
 
 ```text
-PBDD
-  ├── Protocol   # 协议：事件、生命周期、工作流、产物契约
-  ├── Brain      # 项目大脑：项目状态数据库
-  ├── Workflow   # 工程流程：状态转换规则
-  └── Artifacts  # 工程产物：Spec、ADR、Task、Review、Release 等
+AI shouldn't remember conversations.
+AI should remember projects.
 ```
 
-一句话：
+给项目一个 Project Brain，让任何 AI Agent 变成持续维护项目的软件工程师。
+
+<p align="center">
+  <img src="docs/assets/pbdd-flow.svg" alt="PBDD turns requests into project memory and engineering workflow" width="820">
+</p>
+
+## 为什么是 PBDD？
+
+今天的 AI 软件开发通常是这样：
 
 ```text
-Event -> Brain -> Workflow -> Artifacts
+你
+  -> "实现登录"
+  -> AI 写代码
 ```
 
-用户提出意图，Runtime 将其解释为事件；事件驱动工作流状态转换；Brain 记录项目状态；Artifacts 承载可交付的工程产物。
+然后第二天：
 
-## 为什么不是框架
+```text
+New Chat
+  -> "继续"
+  -> AI: "你能先解释一下这个项目吗？"
+```
 
-传统框架通常把业务代码组织方式、运行时依赖和扩展点绑定在一起。PBDD 不是这样。
+每一次对话都从零开始。
 
-PBDD 只定义：
+你的项目有记忆。
 
-- 项目清单：`pbdd.yaml`
-- 项目状态模型：Brain
-- 事件协议：Event
-- 生命周期协议：Lifecycle
-- 工作流状态机：Workflow
-- 工程产物契约：Artifact
-- 项目目录约定：Convention
+你的 AI 没有。
 
-PBDD 不定义：
+PBDD 要改变这一点：把长期记忆从聊天记录里拿出来，放回项目本身。
 
-- 具体 Agent 提示词
-- IDE 插件行为
-- 业务代码结构
-- 某一种语言或框架
-- 某一家 AI 平台的专有能力
+## The Shift
 
-## 仓库结构
+传统 AI 编程：
 
-当前工作区拆成三个可独立维护的项目：
+```text
+Chat -> Context -> Code
+```
+
+PBDD：
+
+```text
+Event -> Project Brain -> Workflow -> Engineering -> Code
+```
+
+对话是临时的。
+
+项目是长期的。
+
+## How It Works
+
+PBDD 把每一次用户请求都转成一个工程事件。
+
+```text
+User: 增加退款能力。
+
+Agent:
+  [1] 识别 Feature Event
+  [2] 更新 Project Brain
+  [3] 分析影响范围
+  [4] 更新 Specification
+  [5] 创建 Tasks
+  [6] 实现功能
+  [7] 测试变更
+  [8] 回写 Brain
+```
+
+最终产物不只是代码，而是一个知道发生了什么、为什么变化、哪里还有风险、下一步该做什么的项目。
+
+## Architecture
+
+```text
+                 User
+                  |
+                  v
+            Project Agent
+                  |
+                  v
+          PBDD Skill Runtime
+                  |
+                  v
+             Project Brain
+                  |
+  ---------------------------------
+  Workflow   Knowledge   State
+  Spec       Tasks       History
+  Risks      Decisions   Health
+  ---------------------------------
+                  |
+                  v
+              Source Code
+```
+
+PBDD 不是 Agent。
+
+PBDD 是项目记忆和工程协议。任何 Agent 都可以遵守它。
+
+## The Brain
+
+```text
+Project Brain
+  |-- Features
+  |-- Tasks
+  |-- Knowledge
+  |-- Architecture
+  |-- Risks
+  |-- Timeline
+  |-- Decisions
+  `-- Health
+```
+
+项目需要记住的一切，都应该在这里。
+
+不在隐藏聊天记录里。
+
+不在某个平台账号里。
+
+不在某个 Agent 的私有上下文里。
+
+## Demo First
+
+给一个 Agent 一个 PBDD 项目，然后说：
+
+```text
+Add refund support.
+```
+
+一个理解 PBDD 的 Agent 应该知道工程动作：
+
+```text
+[ok] 创建 Feature Event
+[ok] 更新 Project Brain
+[ok] 分析受影响的规格和代码
+[ok] 创建实现任务
+[ok] 执行 Workflow
+[ok] 测试变更
+[ok] 记录决策、风险和进度
+```
+
+下一个 Agent 可以从项目继续，而不是从你的记忆继续。
+
+## Principles
+
+```text
+一切从 Event 开始。
+
+Project Brain 是事实源。
+
+Agent 维护工程。
+
+Human 维护业务意图。
+
+Workflow over Prompt.
+
+Projects over Conversations.
+```
+
+## Getting Started
+
+```bash
+git clone https://github.com/LittleBlacky/PBDD.git
+cd PBDD
+```
+
+把 starter 复制成一个新项目：
+
+```bash
+cp -r pbdd-starter ../my-project
+```
+
+然后对你的 Agent 说：
+
+```text
+Boot this PBDD project.
+```
+
+这就是 PBDD 想提供的体验。
+
+## Repository
 
 ```text
 PBDD/
-  ├── pbdd-spec/      # 规范：规则源
-  ├── pbdd-skill/     # Runtime：Agent 实现
-  └── pbdd-starter/   # Starter：项目模板
+  pbdd-spec/      # 开放规范
+  pbdd-skill/     # Agent Runtime 实现
+  pbdd-starter/   # 项目模板
 ```
 
-### `pbdd-spec/`
-
-PBDD 的规范源。
-
-它定义：
-
-- Event 类型
-- Brain 数据模型
-- Workflow 生命周期
-- Artifact Schema
-- Project Manifest：`pbdd.yaml`
-- Conformance 规则
-
-规范必须保持机器可读优先。`schemas/` 和 `workflow/` 是约束来源，Markdown 文档用于解释意图。
-
-### `pbdd-skill/`
-
-PBDD 的 Agent Runtime 实现。
-
-它负责：
-
-- 读取 `pbdd.yaml`
-- 加载 PBDD Spec
-- 读取和维护 Brain
-- 执行 Workflow 状态转换
-- 创建或更新 Artifacts
-- 面向不同 Agent 或 IDE 提供适配层
-
-Runtime 可以包含提示词、脚本、适配器和测试，但不能重新定义规范。
-
-### `pbdd-starter/`
-
-PBDD 项目模板。
-
-它只包含一个真实项目需要的最小结构：
+一个 PBDD 项目长这样：
 
 ```text
 project/
@@ -108,148 +208,58 @@ project/
   tests/
 ```
 
-Starter 是规范的消费者，不包含 Protocol 或 Workflow 定义。
+README 负责讲愿景。细节放在规范和文档里。
 
-## 依赖方向
-
-```text
-pbdd-spec
-  -> pbdd-skill
-  -> pbdd-starter
-  -> user project
-```
-
-依赖方向不能反过来。
-
-- Spec 不依赖 Skill。
-- Skill 实现 Spec。
-- Starter 使用 Spec 和 Skill。
-- 用户项目复制 Starter 并积累自己的 Brain 和 Artifacts。
-
-## Brain 是什么
-
-Brain 不是普通文档，而是项目状态。
-
-推荐结构：
+## Ecosystem
 
 ```text
-brain/
-  project.md
-  feature/
-  task/
-  risk/
-  decision/
-  knowledge/
-  timeline/
-  health/
+PBDD Specification
+        |
+        v
+PBDD Runtime / Skill
+        |
+        v
+Agent
+        |
+        v
+Project
 ```
 
-示例：
+PBDD 不应该属于某一个 AI 工具。
+
+Claude、Cursor、ChatGPT、Codex、本地 Agent、CI Agent、未来的 IDE，都应该能遵守同一个 Project Brain。
+
+## Roadmap
 
 ```text
-Feature: Coupon
-Status: Implementing
-Owner: Agent
-Progress: 60%
-Tasks: TASK-22, TASK-23
+[x] Project Brain
+[x] Workflow model
+[x] Event model
+[x] Codex Skill runtime
+[x] Starter project
+[ ] Multi-agent workflow
+[ ] Enterprise Brain
+[ ] Cloud sync
+[ ] IDE plugin
+[ ] Visual workflow
+[ ] Conformance test suite
 ```
 
-Markdown 只是当前存储格式。语义上，Brain 是 Project Database。
+## Manifesto
 
-## Workflow 是什么
+软件工程不是生成代码。
 
-Workflow 是状态转换，不是 Prompt。
+软件工程是演进项目。
 
-例如 Feature 生命周期：
+PBDD 教 AI 如何演进软件。
+
+项目应该拥有记忆。
+
+Agent 应该拥有纪律。
+
+工程应该走向自治。
 
 ```text
-Draft -> Planning -> Implementing -> Testing -> Done
+The future isn't AI writing code.
+The future is AI owning software engineering.
 ```
-
-所有 Agent 都应遵守同一套状态机。Runtime 的职责是读取 Workflow 定义并执行合法转换。
-
-## Artifacts 是什么
-
-Artifacts 是工程产物，不是 Brain。
-
-常见产物包括：
-
-- Spec
-- ADR
-- Task
-- Review
-- Release note
-- Knowledge note
-- Test evidence
-- Code
-
-Brain 记录当前状态和索引；Artifacts 保存可审阅、可交付、可追溯的工程内容。
-
-## 快速开始
-
-复制 Starter：
-
-```powershell
-Copy-Item -Recurse pbdd-starter my-project
-```
-
-进入项目：
-
-```powershell
-Set-Location my-project
-```
-
-编辑：
-
-```text
-pbdd.yaml
-brain/project.md
-```
-
-然后让支持 PBDD 的 Agent Runtime 读取项目：
-
-```text
-Use PBDD to inspect the project manifest, update brain state, run the appropriate workflow, and maintain engineering artifacts.
-```
-
-## 当前版本
-
-当前规范草案版本：
-
-```text
-0.1.0
-```
-
-当前状态：
-
-- `pbdd-spec/`：初始规范草案
-- `pbdd-skill/`：Codex Skill Runtime 初版
-- `pbdd-starter/`：最小项目模板
-
-## 提交规范
-
-本仓库使用 Conventional Commits。
-
-常用类型：
-
-- `feat`: 新增能力
-- `fix`: 修复问题
-- `docs`: 文档更新
-- `refactor`: 不改变行为的结构调整
-- `chore`: 仓库维护、配置、杂项
-- `test`: 测试相关
-- `ci`: 自动化和 CI 配置
-
-详细说明见 [docs/commit-convention.md](docs/commit-convention.md)。
-
-## 设计原则
-
-- Spec 是规则源，Runtime 是实现，Project 是消费者。
-- 机器可读规范优先，Markdown 负责解释。
-- Brain 维护状态，Artifacts 承载产物。
-- Prompt 不属于协议核心。
-- PBDD 不绑定任何 Agent、IDE、语言或平台。
-
-## License
-
-当前尚未声明 License。
