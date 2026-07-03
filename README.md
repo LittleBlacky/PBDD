@@ -4,6 +4,10 @@
 
 **PBDD（Project Brain Driven Development）是一套开放规范，用于让 AI Agent 以统一协议维护项目状态、执行工程流程并生成工程产物。**
 
+> **核心理念：AI shouldn't remember conversations. AI should remember projects.**
+>
+> PBDD 的目标不是让 AI 记住一次次对话，而是让项目自己拥有可读取、可演进、可验证的长期记忆。
+
 PBDD 不定位为代码框架。它更接近 Kubernetes、Dockerfile、OpenAPI 或 MCP 这类工程规范：定义协议、状态、约定和产物边界，由不同 Runtime 或 Agent 实现。
 
 ## 核心定位

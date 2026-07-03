@@ -1,5 +1,11 @@
 # Concepts
 
+## Core Belief
+
+AI shouldn't remember conversations. AI should remember projects.
+
+PBDD makes project memory explicit, versionable, portable, and inspectable. The project stores its own identity, plans, tasks, decisions, risks, knowledge, timeline, and health so any conforming runtime can continue work without depending on private conversation history.
+
 ## Specification
 
 The specification defines the rules. It is independent of runtime

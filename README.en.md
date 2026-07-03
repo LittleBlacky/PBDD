@@ -4,6 +4,10 @@
 
 **PBDD (Project Brain Driven Development) is an open specification for helping AI agents maintain project state, execute engineering workflows, and produce durable engineering artifacts through a shared protocol.**
 
+> **Core belief: AI shouldn't remember conversations. AI should remember projects.**
+>
+> PBDD moves durable memory out of chat history and into the project itself, where it can be read, evolved, validated, and shared by any conforming agent.
+
 PBDD is not a code framework. It is closer to Kubernetes, Dockerfile, OpenAPI, or MCP: it defines protocols, states, conventions, and artifact boundaries that different runtimes and agents can implement.
 
 ## Positioning

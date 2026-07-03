@@ -6,6 +6,12 @@ engineering artifacts across AI agents.
 PBDD is not a code framework. It defines a protocol, project conventions, state
 schemas, workflow state machines, and artifact contracts.
 
+## Core Belief
+
+AI shouldn't remember conversations. AI should remember projects.
+
+PBDD treats durable project memory as explicit state stored with the project, not as hidden chat history owned by a specific agent or platform.
+
 ## Scope
 
 This project defines:
