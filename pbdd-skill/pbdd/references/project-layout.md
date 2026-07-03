@@ -5,6 +5,7 @@
 ```text
 project/
   pbdd.yaml
+  AGENTS.md
   brain/
   artifacts/
 ```
@@ -35,15 +36,16 @@ artifacts/
   test/
 ```
 
-## Bootstrap Rules
+## Initialization Rules
 
-When creating a new PBDD project:
+When initializing PBDD in an existing project:
 
-1. Create `pbdd.yaml`.
-2. Create required brain and artifact directories.
-3. Add a project identity file.
-4. Add a health file with initial unknown or draft status.
-5. Avoid adding implementation-specific prompt files.
+1. Prefer `scripts/initialize_project.py <project-root>`.
+2. Preserve existing files.
+3. Add only missing required directories and files.
+4. Create `AGENTS.md` so future agents know to use the PBDD Skill.
+5. Avoid moving user source code.
+6. Record assumptions in `brain/decision/` when initialization requires non-obvious choices.
 
 ## Repair Rules
 

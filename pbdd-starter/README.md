@@ -1,20 +1,30 @@
 # PBDD Starter
 
-This is a minimal starter project for applications that use PBDD.
+This is an optional reference template for PBDD projects.
 
-It contains only project-local state and output folders:
+Most users should not copy this manually. The primary user experience is to enable the PBDD Skill inside an existing project and ask it to initialize PBDD.
 
-- `pbdd.yaml`
-- `brain/`
-- `artifacts/`
-- `src/`
-- `tests/`
+## Primary Flow
 
-The PBDD specification lives in `../pbdd-spec/`. Runtime behavior lives in
-`../pbdd-skill/`.
+```text
+Use the PBDD skill.
+Initialize PBDD in this project.
+```
 
-## Start
+The Skill creates the same core structure this starter demonstrates.
 
-Copy this directory as the base of a new project, then update `pbdd.yaml` and
-`brain/project.md`.
+## Layout
 
+```text
+project/
+  pbdd.yaml
+  AGENTS.md
+  brain/
+  artifacts/
+  src/
+  tests/
+```
+
+## When To Use This Starter
+
+Use this starter when you want to inspect the expected project shape, create fixtures, or seed a new repository without running a Skill-enabled agent.

@@ -61,20 +61,22 @@ Projects are permanent.
 
 ## How It Works
 
-PBDD turns every user request into an engineering event.
+The entry point is not a user-written process, and it is not a manual template copy. The entry point is the Skill.
+
+A user enables the PBDD Skill inside an existing project and asks it to initialize PBDD. After that, the agent uses the Skill to create or read the Project Brain, load the spec, execute workflows, and keep the project maintained.
 
 ```text
 User: Add refund support.
 
-Agent:
-  [1] Detect Feature Event
-  [2] Update Project Brain
-  [3] Analyze Impact
-  [4] Update Specification
-  [5] Create Tasks
-  [6] Implement
-  [7] Test
-  [8] Update Brain
+PBDD Skill:
+  [1] Read pbdd.yaml. If missing, initialize PBDD
+  [2] Create or load Project Brain
+  [3] Detect Feature Event
+  [4] Execute Workflow
+  [5] Update Specs and Tasks
+  [6] Drive the agent to implement code
+  [7] Test the change
+  [8] Update Project Brain
 ```
 
 The result is not just code. The result is a project that knows what changed, why it changed, what remains risky, and what should happen next.
@@ -167,24 +169,31 @@ Projects over Conversations.
 
 ## Getting Started
 
-```bash
-git clone https://github.com/LittleBlacky/PBDD.git
-cd PBDD
-```
+First, enable the PBDD Skill in your agent environment.
 
-Copy the starter into a new project:
+Second, enter any existing project:
 
 ```bash
-cp -r pbdd-starter ../my-project
+cd my-project
 ```
 
-Then ask your agent:
+Third, tell your agent:
 
 ```text
-Boot this PBDD project.
+Use the PBDD skill.
+Initialize PBDD in this project.
 ```
 
-That's the experience PBDD is designed for.
+The Skill creates the PBDD structure in the current project:
+
+```text
+pbdd.yaml
+AGENTS.md
+brain/
+artifacts/
+```
+
+After that, the user should not manually maintain PBDD. The user states intent; the Skill tells the agent how to read the Project Brain, run workflows, update artifacts, and maintain project state.
 
 ## Repository
 
@@ -192,14 +201,15 @@ That's the experience PBDD is designed for.
 PBDD/
   pbdd-spec/      # the open specification
   pbdd-skill/     # the agent runtime implementation
-  pbdd-starter/   # the project template
+  pbdd-starter/   # the optional project template
 ```
 
-A PBDD project looks like this:
+After Skill initialization, a project looks like this:
 
 ```text
 project/
   pbdd.yaml
+  AGENTS.md
   brain/
   artifacts/
   src/
@@ -211,21 +221,21 @@ The README is the vision. The details live in the spec and docs.
 ## Ecosystem
 
 ```text
-PBDD Specification
-        |
-        v
-PBDD Runtime / Skill
-        |
-        v
-Agent
-        |
-        v
-Project
+PBDD Skill
+     |
+     v
+Initialize Project Brain
+     |
+     v
+Maintain Workflow
+     |
+     v
+Evolve Project Continuously
 ```
 
 PBDD should not belong to one AI tool.
 
-Claude, Cursor, ChatGPT, Codex, local agents, CI agents, and future IDEs should all be able to follow the same project brain.
+The same project can be maintained by different agents. The key is to configure those agents with a PBDD Skill, so Claude, Cursor, ChatGPT, Codex, local agents, CI agents, and future IDEs can all follow the same Project Brain.
 
 ## Roadmap
 

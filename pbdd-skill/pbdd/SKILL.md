@@ -1,13 +1,35 @@
 ---
 name: pbdd
-description: Maintain projects that use the PBDD specification. Use when Codex needs to inspect or create a PBDD project, read pbdd.yaml, load or update brain state, run a PBDD workflow transition, create or update artifacts such as specs, ADRs, tasks, reviews, releases, or keep an AI-assisted project aligned with the PBDD protocol.
+description: Maintain and initialize projects that use the PBDD specification. Use when Codex needs to initialize PBDD in an existing project, inspect or create pbdd.yaml, load or update brain state, run a PBDD workflow transition, create or update artifacts such as specs, ADRs, tasks, reviews, releases, or keep an AI-assisted project aligned with the PBDD protocol.
 ---
 
 # PBDD Runtime
 
 ## Overview
 
-Use this skill as a PBDD Runtime. PBDD is a specification; this skill is only an implementation that reads the spec, interprets project state, and maintains brain and artifact files.
+Use this skill as a PBDD Runtime. PBDD is a specification; this skill is the implementation entry point that initializes project state, reads the spec, interprets user intent, and maintains brain and artifact files.
+
+## User Model
+
+Users do not maintain PBDD manually and do not need to copy the starter by hand.
+
+A user enables this skill in an agent environment, opens an existing project, and asks the agent to initialize or boot PBDD. This skill then creates or reads the PBDD structure and teaches the agent how to maintain it.
+
+## Initialize PBDD
+
+When the user asks to initialize PBDD in a project:
+
+1. Run `scripts/initialize_project.py <project-root>` or create the same structure manually if the script is unavailable.
+2. Preserve existing files. Never overwrite an existing `pbdd.yaml`, `AGENTS.md`, `brain/`, or `artifacts/` file without explicit user approval.
+3. Create missing project state files:
+   - `pbdd.yaml`
+   - `AGENTS.md`
+   - `brain/project.md`
+   - `brain/health/status.md`
+   - `brain/timeline/README.md`
+   - required `brain/` and `artifacts/` subdirectories
+4. Inspect the project source tree and update `brain/project.md` only with facts that can be inferred from local files.
+5. Report what was created and what still needs user input.
 
 ## Runtime Rule
 
@@ -16,15 +38,16 @@ Do not invent local protocol rules when a PBDD spec file exists. Treat the neare
 ## Project Detection
 
 1. Locate `pbdd.yaml` in the workspace root or current project root.
-2. Read `pbdd.yaml` and identify:
+2. If `pbdd.yaml` is missing and the user asked to initialize PBDD, initialize it.
+3. Read `pbdd.yaml` and identify:
    - `pbdd.spec_version`
    - `brain.path`
    - `artifacts.path`
-3. Locate the PBDD specification:
+4. Locate the PBDD specification:
    - Prefer a sibling `pbdd-spec/` directory in this workspace.
    - Otherwise use the spec path declared by the project, if present.
    - Otherwise use the runtime references in this skill as fallback guidance.
-4. Validate that the project has a brain directory and an artifacts directory.
+5. Validate that the project has a brain directory and an artifacts directory.
 
 ## Workflow
 
@@ -73,4 +96,4 @@ Read `references/runtime.md` when implementing or changing runtime behavior. Rea
 
 ## Scripts
 
-Use `scripts/inspect_project.py` to summarize a PBDD project layout and identify missing required directories. Patch scripts here instead of rewriting repeated inspection logic in answers.
+Use `scripts/initialize_project.py` to initialize PBDD in an existing project. Use `scripts/inspect_project.py` to summarize a PBDD project layout and identify missing required directories. Patch scripts here instead of rewriting repeated initialization or inspection logic in answers.

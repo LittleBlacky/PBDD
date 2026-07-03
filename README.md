@@ -61,18 +61,20 @@ PBDD：
 
 ## 它如何工作
 
-PBDD 把每一次用户请求都转成一个工程事件。
+PBDD 的入口不是用户手写流程，也不是用户手动复制模板，而是 Skill。
+
+用户在自己的项目里启用 PBDD Skill，然后让 Skill 初始化 PBDD。之后，智能体通过 Skill 创建或读取项目大脑、加载规范、执行工作流，并持续维护项目。
 
 ```text
 用户：增加退款能力。
 
-智能体：
-  [1] 识别功能事件
-  [2] 更新项目大脑
-  [3] 分析影响范围
-  [4] 更新规格说明
-  [5] 创建任务
-  [6] 实现功能
+PBDD Skill：
+  [1] 读取 pbdd.yaml。如果没有，就初始化 PBDD
+  [2] 创建或加载项目大脑
+  [3] 识别功能事件
+  [4] 执行工作流
+  [5] 更新规格说明和任务
+  [6] 驱动智能体实现代码
   [7] 测试变更
   [8] 回写项目大脑
 ```
@@ -169,24 +171,31 @@ PBDD 是项目记忆和工程协议。任何智能体都可以遵守它。
 
 ## 快速开始
 
-```bash
-git clone https://github.com/LittleBlacky/PBDD.git
-cd PBDD
-```
+第一步，在你的智能体环境中启用 PBDD Skill。
 
-把项目模板复制成一个新项目：
+第二步，进入任意已有项目：
 
 ```bash
-cp -r pbdd-starter ../my-project
+cd my-project
 ```
 
-然后对你的智能体说：
+第三步，对智能体说：
 
 ```text
-启动这个 PBDD 项目。
+Use the PBDD skill.
+Initialize PBDD in this project.
 ```
 
-这就是 PBDD 想提供的体验。
+Skill 会在当前项目中创建 PBDD 所需结构：
+
+```text
+pbdd.yaml
+AGENTS.md
+brain/
+artifacts/
+```
+
+之后用户不需要手动维护 PBDD。用户只需要提需求，Skill 会告诉智能体如何读取项目大脑、执行工作流、更新产物并维护项目状态。
 
 ## 仓库结构
 
@@ -194,14 +203,15 @@ cp -r pbdd-starter ../my-project
 PBDD/
   pbdd-spec/      # 开放规范
   pbdd-skill/     # 智能体运行时实现
-  pbdd-starter/   # 项目模板
+  pbdd-starter/   # 可选项目模板
 ```
 
-一个 PBDD 项目长这样：
+Skill 初始化后的项目长这样：
 
 ```text
 project/
   pbdd.yaml
+  AGENTS.md
   brain/
   artifacts/
   src/
@@ -213,21 +223,21 @@ project/
 ## 生态
 
 ```text
-PBDD 规范
+PBDD Skill
     |
     v
-PBDD 运行时 / 技能
+初始化项目大脑
     |
     v
-智能体
+维护工作流
     |
     v
-项目
+持续演进项目
 ```
 
 PBDD 不应该属于某一个 AI 工具。
 
-Claude、Cursor、ChatGPT、Codex、本地智能体、CI 智能体、未来的 IDE，都应该能遵守同一个项目大脑。
+同一个项目可以被不同智能体维护。关键是让这些智能体都配置对应的 PBDD Skill，这样 Claude、Cursor、ChatGPT、Codex、本地智能体、CI 智能体、未来的 IDE，都能遵守同一个项目大脑。
 
 ## 路线图
 
