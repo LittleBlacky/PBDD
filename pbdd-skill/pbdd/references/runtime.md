@@ -21,6 +21,17 @@ A PBDD runtime must not:
 - Store implementation-only metadata in brain files.
 - Delete project history without an explicit superseding event.
 
+## Protocol References
+
+For full iteration behavior, read these files as needed:
+
+- `iteration-protocol.md` for the end-to-end loop.
+- `event-handling.md` for request classification.
+- `workflow-execution.md` for lifecycle transitions.
+- `brain-maintenance.md` for brain updates.
+- `artifact-maintenance.md` for engineering outputs.
+- `done-criteria.md` before marking work complete.
+
 ## Event Handling
 
 When a user asks for a change, map it to the smallest useful PBDD event.

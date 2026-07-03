@@ -19,52 +19,43 @@ A user enables this skill in an agent environment, opens an existing project, an
 
 When the user asks to initialize PBDD in a project:
 
-1. Run `scripts/initialize_project.py <project-root>` or create the same structure manually if the script is unavailable.
-2. Preserve existing files. Never overwrite an existing `pbdd.yaml`, `AGENTS.md`, `brain/`, or `artifacts/` file without explicit user approval.
-3. Create missing project state files:
-   - `pbdd.yaml`
-   - `AGENTS.md`
-   - `brain/project.md`
-   - `brain/health/status.md`
-   - `brain/timeline/README.md`
-   - required `brain/` and `artifacts/` subdirectories
+1. Read `references/project-layout.md`.
+2. Run `scripts/initialize_project.py <project-root>` or create the same structure manually if the script is unavailable.
+3. Preserve existing files. Never overwrite an existing `pbdd.yaml`, `AGENTS.md`, `brain/`, or `artifacts/` file without explicit user approval.
 4. Inspect the project source tree and update `brain/project.md` only with facts that can be inferred from local files.
 5. Report what was created and what still needs user input.
+
+## Boot PBDD
+
+When the user asks to boot or continue a PBDD project:
+
+1. Locate and read `pbdd.yaml`.
+2. Read `brain/project.md` and `brain/health/status.md`.
+3. Inspect active feature, task, risk, decision, knowledge, and timeline entries.
+4. Inspect relevant artifacts.
+5. Summarize the current project state before changing code.
+
+If `pbdd.yaml` is missing and the user asked to use PBDD, initialize PBDD first.
 
 ## Runtime Rule
 
 Do not invent local protocol rules when a PBDD spec file exists. Treat the nearest available `pbdd-spec/` project as the source of truth. If the spec is missing, continue conservatively and record assumptions in a decision artifact.
 
-## Project Detection
+## Iteration Workflow
 
-1. Locate `pbdd.yaml` in the workspace root or current project root.
-2. If `pbdd.yaml` is missing and the user asked to initialize PBDD, initialize it.
-3. Read `pbdd.yaml` and identify:
-   - `pbdd.spec_version`
-   - `brain.path`
-   - `artifacts.path`
-4. Locate the PBDD specification:
-   - Prefer a sibling `pbdd-spec/` directory in this workspace.
-   - Otherwise use the spec path declared by the project, if present.
-   - Otherwise use the runtime references in this skill as fallback guidance.
-5. Validate that the project has a brain directory and an artifacts directory.
+For any non-trivial project change:
 
-## Workflow
-
-For any project change:
-
-1. Interpret the user request as a PBDD event.
-2. Read the relevant brain files before editing.
-3. Select the matching workflow definition from the spec.
-4. Check whether the requested state transition is valid.
-5. Update brain state.
-6. Create or update required artifacts.
-7. Record important decisions, risks, knowledge, or timeline entries.
-8. Report the changed brain and artifact files.
+1. Read `references/iteration-protocol.md`.
+2. Read `references/event-handling.md` to classify the user request.
+3. Read `references/workflow-execution.md` to choose and validate the lifecycle transition.
+4. Read `references/brain-maintenance.md` before editing `brain/`.
+5. Read `references/artifact-maintenance.md` before editing `artifacts/`.
+6. Change source code and tests only after the relevant state and artifact plan is clear.
+7. Read `references/done-criteria.md` before marking work done or sending the final iteration summary.
 
 ## Brain Maintenance
 
-Treat `brain/` as project state, not as documentation. Keep entries short, structured, and current. Preserve existing user-authored content unless the request clearly supersedes it.
+Treat `brain/` as project state, not as documentation. Keep entries short, structured, current, and linked to artifacts or evidence. Preserve existing user-authored content unless the request clearly supersedes it.
 
 Expected brain areas:
 
@@ -92,7 +83,16 @@ Expected artifact areas:
 
 ## References
 
-Read `references/runtime.md` when implementing or changing runtime behavior. Read `references/project-layout.md` when bootstrapping or repairing a project.
+Use references by task:
+
+- `references/project-layout.md`: initialize or repair PBDD structure.
+- `references/runtime.md`: understand runtime responsibilities and boundaries.
+- `references/iteration-protocol.md`: run a complete project iteration.
+- `references/event-handling.md`: classify user intent as PBDD events.
+- `references/workflow-execution.md`: apply lifecycle transitions.
+- `references/brain-maintenance.md`: update project brain state.
+- `references/artifact-maintenance.md`: create or update engineering artifacts.
+- `references/done-criteria.md`: decide whether work is truly complete.
 
 ## Scripts
 
