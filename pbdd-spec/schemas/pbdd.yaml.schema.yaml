@@ -1,0 +1,51 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/pbdd.yaml.schema.yaml
+title: PBDD Project Manifest
+type: object
+required:
+  - pbdd
+  - project
+  - brain
+  - artifacts
+properties:
+  pbdd:
+    type: object
+    required:
+      - spec_version
+    properties:
+      spec_version:
+        type: string
+      runtime:
+        type: string
+      profile:
+        type: string
+  project:
+    type: object
+    required:
+      - name
+      - kind
+    properties:
+      name:
+        type: string
+      kind:
+        type: string
+      description:
+        type: string
+  brain:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        type: string
+  artifacts:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        type: string
+  conventions:
+    type: object
+additionalProperties: false
+

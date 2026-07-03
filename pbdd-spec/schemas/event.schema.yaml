@@ -1,0 +1,42 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/event.schema.yaml
+title: PBDD Event
+type: object
+required:
+  - id
+  - type
+  - source
+  - occurred_at
+  - subject
+  - payload
+properties:
+  id:
+    type: string
+  type:
+    type: string
+  source:
+    type: string
+    enum:
+      - user
+      - agent
+      - ci
+      - system
+  occurred_at:
+    type: string
+    format: date-time
+  subject:
+    type: object
+    required:
+      - kind
+      - id
+    properties:
+      kind:
+        type: string
+      id:
+        type: string
+  payload:
+    type: object
+  supersedes:
+    type: string
+additionalProperties: false
+

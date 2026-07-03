@@ -1,0 +1,38 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/task.schema.yaml
+title: PBDD Task
+type: object
+required:
+  - id
+  - title
+  - status
+  - blocked
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  status:
+    type: string
+    enum:
+      - Todo
+      - Doing
+      - Blocked
+      - Done
+      - Canceled
+  blocked:
+    type: boolean
+  blocker:
+    type: string
+  depends:
+    type: array
+    items:
+      type: string
+  feature:
+    type: string
+  evidence:
+    type: array
+    items:
+      type: string
+additionalProperties: false
+

@@ -1,0 +1,17 @@
+pbdd:
+  spec_version: 0.1.0
+  runtime: pbdd-skill
+  profile: starter
+project:
+  name: pbdd-starter-project
+  kind: application
+  description: A project initialized from the PBDD starter template.
+brain:
+  path: brain
+artifacts:
+  path: artifacts
+conventions:
+  feature_id_prefix: FEAT
+  task_id_prefix: TASK
+  decision_id_prefix: ADR
+

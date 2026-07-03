@@ -1,0 +1,44 @@
+kind: Workflow
+name: Feature
+version: 0.1.0
+initial_state: Draft
+terminal_states:
+  - Done
+  - Canceled
+states:
+  - Draft
+  - Planning
+  - Implementing
+  - Testing
+  - Done
+  - Canceled
+transitions:
+  - from: Draft
+    to: Planning
+    event: feature.proposed
+    produces:
+      - spec
+  - from: Planning
+    to: Implementing
+    event: feature.planned
+    requires:
+      - impact
+      - tasks
+  - from: Implementing
+    to: Testing
+    event: feature.implemented
+    requires:
+      - code
+      - test_plan
+  - from: Testing
+    to: Done
+    event: feature.tested
+    requires:
+      - test_evidence
+  - from: Draft
+    to: Canceled
+    event: feature.canceled
+  - from: Planning
+    to: Canceled
+    event: feature.canceled
+

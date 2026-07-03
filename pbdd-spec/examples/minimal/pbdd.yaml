@@ -1,0 +1,15 @@
+pbdd:
+  spec_version: 0.1.0
+  profile: minimal
+project:
+  name: minimal-pbdd-project
+  kind: application
+  description: Minimal PBDD example project.
+brain:
+  path: brain
+artifacts:
+  path: artifacts
+conventions:
+  task_id_prefix: TASK
+  feature_id_prefix: FEAT
+

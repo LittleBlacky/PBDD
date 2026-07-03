@@ -1,0 +1,33 @@
+kind: Workflow
+name: Research
+version: 0.1.0
+initial_state: Question
+terminal_states:
+  - Knowledge
+  - Abandoned
+states:
+  - Question
+  - Investigating
+  - Synthesizing
+  - Knowledge
+  - Abandoned
+transitions:
+  - from: Question
+    to: Investigating
+    event: research.started
+    produces:
+      - research_plan
+  - from: Investigating
+    to: Synthesizing
+    event: research.evidence_collected
+    requires:
+      - sources
+  - from: Synthesizing
+    to: Knowledge
+    event: research.summarized
+    produces:
+      - knowledge
+  - from: Question
+    to: Abandoned
+    event: research.abandoned
+

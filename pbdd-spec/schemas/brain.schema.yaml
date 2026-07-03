@@ -1,0 +1,44 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/brain.schema.yaml
+title: PBDD Brain
+type: object
+required:
+  - identity
+  - features
+  - tasks
+  - risks
+  - decisions
+  - knowledge
+  - timeline
+  - health
+properties:
+  identity:
+    type: object
+  features:
+    type: array
+    items:
+      $ref: ./feature.schema.yaml
+  tasks:
+    type: array
+    items:
+      $ref: ./task.schema.yaml
+  risks:
+    type: array
+    items:
+      type: object
+  decisions:
+    type: array
+    items:
+      type: object
+  knowledge:
+    type: array
+    items:
+      type: object
+  timeline:
+    type: array
+    items:
+      type: object
+  health:
+    type: object
+additionalProperties: false
+

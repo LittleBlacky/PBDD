@@ -1,0 +1,4 @@
+interface:
+  display_name: "PBDD"
+  short_description: "Maintain PBDD project brain, workflows, and artifacts."
+  default_prompt: "Use PBDD to inspect the project manifest, update brain state, run the appropriate workflow, and maintain engineering artifacts."

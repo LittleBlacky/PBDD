@@ -1,0 +1,40 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/feature.schema.yaml
+title: PBDD Feature
+type: object
+required:
+  - id
+  - title
+  - status
+  - owner
+  - progress
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  status:
+    type: string
+    enum:
+      - Draft
+      - Planning
+      - Implementing
+      - Testing
+      - Done
+      - Canceled
+  owner:
+    type: string
+  progress:
+    type: integer
+    minimum: 0
+    maximum: 100
+  tasks:
+    type: array
+    items:
+      type: string
+  artifacts:
+    type: array
+    items:
+      type: string
+additionalProperties: false
+

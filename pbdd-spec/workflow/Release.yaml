@@ -1,0 +1,35 @@
+kind: Workflow
+name: Release
+version: 0.1.0
+initial_state: Preparing
+terminal_states:
+  - Released
+  - Canceled
+states:
+  - Preparing
+  - Validating
+  - Releasing
+  - Released
+  - Canceled
+transitions:
+  - from: Preparing
+    to: Validating
+    event: release.prepared
+    requires:
+      - changelog
+      - release_scope
+  - from: Validating
+    to: Releasing
+    event: release.validated
+    requires:
+      - test_evidence
+      - approval
+  - from: Releasing
+    to: Released
+    event: release.published
+    produces:
+      - release_note
+  - from: Preparing
+    to: Canceled
+    event: release.canceled
+

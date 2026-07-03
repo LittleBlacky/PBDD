@@ -1,0 +1,36 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pbdd.dev/schemas/artifact.schema.yaml
+title: PBDD Artifact
+type: object
+required:
+  - id
+  - kind
+  - title
+  - path
+  - status
+properties:
+  id:
+    type: string
+  kind:
+    type: string
+    enum:
+      - spec
+      - adr
+      - task
+      - review
+      - release
+      - knowledge
+      - test
+      - code
+  title:
+    type: string
+  path:
+    type: string
+  status:
+    type: string
+  subjects:
+    type: array
+    items:
+      type: string
+additionalProperties: false
+

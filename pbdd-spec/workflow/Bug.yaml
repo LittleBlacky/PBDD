@@ -1,0 +1,41 @@
+kind: Workflow
+name: Bug
+version: 0.1.0
+initial_state: Reported
+terminal_states:
+  - Resolved
+  - Duplicate
+  - Won't Fix
+states:
+  - Reported
+  - Triaging
+  - Fixing
+  - Verifying
+  - Resolved
+  - Duplicate
+  - Won't Fix
+transitions:
+  - from: Reported
+    to: Triaging
+    event: bug.reported
+  - from: Triaging
+    to: Fixing
+    event: bug.accepted
+    requires:
+      - reproduction
+  - from: Fixing
+    to: Verifying
+    event: bug.fixed
+    requires:
+      - code
+      - test_evidence
+  - from: Verifying
+    to: Resolved
+    event: bug.verified
+  - from: Triaging
+    to: Duplicate
+    event: bug.duplicate
+  - from: Triaging
+    to: Won't Fix
+    event: bug.rejected
+

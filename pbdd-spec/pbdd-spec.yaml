@@ -1,0 +1,20 @@
+name: pbdd-spec
+version: 0.1.0
+status: draft
+kind: specification
+exports:
+  manifest_schema: schemas/pbdd.yaml.schema.yaml
+  brain_schema: schemas/brain.schema.yaml
+  event_schema: schemas/event.schema.yaml
+  workflows:
+    - workflow/Feature.yaml
+    - workflow/Bug.yaml
+    - workflow/Research.yaml
+    - workflow/Release.yaml
+conformance:
+  required:
+    - validate_manifest
+    - validate_brain
+    - apply_workflow_transitions
+    - preserve_artifact_history
+
