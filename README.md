@@ -2,20 +2,20 @@
 
 中文 | [English](README.en.md)
 
-## Project Brain Driven Development
+## 项目大脑驱动开发
 
 ```text
-AI shouldn't remember conversations.
-AI should remember projects.
+AI 不应该记住对话。
+AI 应该记住项目。
 ```
 
-给项目一个 Project Brain，让任何 AI Agent 变成持续维护项目的软件工程师。
+给项目一个“项目大脑”，让任何 AI 智能体变成持续维护项目的软件工程师。
 
 <p align="center">
-  <img src="docs/assets/pbdd-flow.svg" alt="PBDD turns requests into project memory and engineering workflow" width="820">
+  <img src="docs/assets/pbdd-flow.zh.svg" alt="PBDD 将用户请求转化为项目记忆和工程流程" width="820">
 </p>
 
-## 为什么是 PBDD？
+## 为什么需要 PBDD？
 
 今天的 AI 软件开发通常是这样：
 
@@ -28,7 +28,7 @@ AI should remember projects.
 然后第二天：
 
 ```text
-New Chat
+新对话
   -> "继续"
   -> AI: "你能先解释一下这个项目吗？"
 ```
@@ -41,84 +41,84 @@ New Chat
 
 PBDD 要改变这一点：把长期记忆从聊天记录里拿出来，放回项目本身。
 
-## The Shift
+## 范式转变
 
 传统 AI 编程：
 
 ```text
-Chat -> Context -> Code
+聊天 -> 上下文 -> 代码
 ```
 
 PBDD：
 
 ```text
-Event -> Project Brain -> Workflow -> Engineering -> Code
+事件 -> 项目大脑 -> 工作流 -> 工程过程 -> 代码
 ```
 
 对话是临时的。
 
 项目是长期的。
 
-## How It Works
+## 它如何工作
 
 PBDD 把每一次用户请求都转成一个工程事件。
 
 ```text
-User: 增加退款能力。
+用户：增加退款能力。
 
-Agent:
-  [1] 识别 Feature Event
-  [2] 更新 Project Brain
+智能体：
+  [1] 识别功能事件
+  [2] 更新项目大脑
   [3] 分析影响范围
-  [4] 更新 Specification
-  [5] 创建 Tasks
+  [4] 更新规格说明
+  [5] 创建任务
   [6] 实现功能
   [7] 测试变更
-  [8] 回写 Brain
+  [8] 回写项目大脑
 ```
 
 最终产物不只是代码，而是一个知道发生了什么、为什么变化、哪里还有风险、下一步该做什么的项目。
 
-## Architecture
+## 架构
 
 ```text
-                 User
+                 用户
                   |
                   v
-            Project Agent
+              项目智能体
                   |
                   v
-          PBDD Skill Runtime
+            PBDD 运行时
                   |
                   v
-             Project Brain
+              项目大脑
                   |
   ---------------------------------
-  Workflow   Knowledge   State
-  Spec       Tasks       History
-  Risks      Decisions   Health
+  工作流     知识       状态
+  规格       任务       历史
+  风险       决策       健康度
   ---------------------------------
                   |
                   v
-              Source Code
+                源代码
 ```
 
-PBDD 不是 Agent。
+PBDD 不是智能体。
 
-PBDD 是项目记忆和工程协议。任何 Agent 都可以遵守它。
+PBDD 是项目记忆和工程协议。任何智能体都可以遵守它。
 
-## The Brain
+## 项目大脑
 
 ```text
-Project Brain
-  |-- Features
-  |-- Tasks
-  |-- Knowledge
-  |-- Architecture
-  |-- Risks
-  |-- Timeline
-  |-- Decisions
-  `-- Health
+项目大脑
+  |-- 功能
+  |-- 任务
+  |-- 知识
+  |-- 架构
+  |-- 风险
+  |-- 时间线
+  |-- 决策
+  `-- 健康度
 ```
 
 项目需要记住的一切，都应该在这里。
@@ -127,73 +127,73 @@ Project Brain
 
 不在某个平台账号里。
 
-不在某个 Agent 的私有上下文里。
+不在某个智能体的私有上下文里。
 
-## Demo First
+## 先看演示
 
-给一个 Agent 一个 PBDD 项目，然后说：
-
-```text
-Add refund support.
-```
-
-一个理解 PBDD 的 Agent 应该知道工程动作：
+给一个智能体一个 PBDD 项目，然后说：
 
 ```text
-[ok] 创建 Feature Event
-[ok] 更新 Project Brain
-[ok] 分析受影响的规格和代码
-[ok] 创建实现任务
-[ok] 执行 Workflow
-[ok] 测试变更
-[ok] 记录决策、风险和进度
+增加退款能力。
 ```
 
-下一个 Agent 可以从项目继续，而不是从你的记忆继续。
-
-## Principles
+一个理解 PBDD 的智能体应该知道工程动作：
 
 ```text
-一切从 Event 开始。
-
-Project Brain 是事实源。
-
-Agent 维护工程。
-
-Human 维护业务意图。
-
-Workflow over Prompt.
-
-Projects over Conversations.
+[完成] 创建功能事件
+[完成] 更新项目大脑
+[完成] 分析受影响的规格和代码
+[完成] 创建实现任务
+[完成] 执行工作流
+[完成] 测试变更
+[完成] 记录决策、风险和进度
 ```
 
-## Getting Started
+下一个智能体可以从项目继续，而不是从你的记忆继续。
+
+## 原则
+
+```text
+一切从事件开始。
+
+项目大脑是事实源。
+
+智能体维护工程。
+
+人类维护业务意图。
+
+工作流优于提示词。
+
+项目优于对话。
+```
+
+## 快速开始
 
 ```bash
 git clone https://github.com/LittleBlacky/PBDD.git
 cd PBDD
 ```
 
-把 starter 复制成一个新项目：
+把项目模板复制成一个新项目：
 
 ```bash
 cp -r pbdd-starter ../my-project
 ```
 
-然后对你的 Agent 说：
+然后对你的智能体说：
 
 ```text
-Boot this PBDD project.
+启动这个 PBDD 项目。
 ```
 
 这就是 PBDD 想提供的体验。
 
-## Repository
+## 仓库结构
 
 ```text
 PBDD/
   pbdd-spec/      # 开放规范
-  pbdd-skill/     # Agent Runtime 实现
+  pbdd-skill/     # 智能体运行时实现
   pbdd-starter/   # 项目模板
 ```
 
@@ -208,44 +208,44 @@ project/
   tests/
 ```
 
-README 负责讲愿景。细节放在规范和文档里。
+首页负责讲愿景。细节放在规范和文档里。
 
-## Ecosystem
+## 生态
 
 ```text
-PBDD Specification
-        |
-        v
-PBDD Runtime / Skill
-        |
-        v
-Agent
-        |
-        v
-Project
+PBDD 规范
+    |
+    v
+PBDD 运行时 / 技能
+    |
+    v
+智能体
+    |
+    v
+项目
 ```
 
 PBDD 不应该属于某一个 AI 工具。
 
-Claude、Cursor、ChatGPT、Codex、本地 Agent、CI Agent、未来的 IDE，都应该能遵守同一个 Project Brain。
+Claude、Cursor、ChatGPT、Codex、本地智能体、CI 智能体、未来的 IDE，都应该能遵守同一个项目大脑。
 
-## Roadmap
+## 路线图
 
 ```text
-[x] Project Brain
-[x] Workflow model
-[x] Event model
-[x] Codex Skill runtime
-[x] Starter project
-[ ] Multi-agent workflow
-[ ] Enterprise Brain
-[ ] Cloud sync
-[ ] IDE plugin
-[ ] Visual workflow
-[ ] Conformance test suite
+[x] 项目大脑
+[x] 工作流模型
+[x] 事件模型
+[x] Codex 技能运行时
+[x] 项目模板
+[ ] 多智能体工作流
+[ ] 企业级项目大脑
+[ ] 云端同步
+[ ] IDE 插件
+[ ] 可视化工作流
+[ ] 一致性测试套件
 ```
 
-## Manifesto
+## 宣言
 
 软件工程不是生成代码。
 
@@ -255,11 +255,11 @@ PBDD 教 AI 如何演进软件。
 
 项目应该拥有记忆。
 
-Agent 应该拥有纪律。
+智能体应该拥有纪律。
 
 工程应该走向自治。
 
 ```text
-The future isn't AI writing code.
-The future is AI owning software engineering.
+未来不是 AI 写代码。
+未来是 AI 掌管软件工程。
 ```

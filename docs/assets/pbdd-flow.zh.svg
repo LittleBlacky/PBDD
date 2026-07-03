@@ -1,0 +1,55 @@
+<svg width="1200" height="430" viewBox="0 0 1200 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">PBDD 项目大脑流程</title>
+  <desc id="desc">用户请求变成事件，更新项目大脑，执行工作流，并产生工程产物和代码。</desc>
+  <rect width="1200" height="430" rx="28" fill="#0D1117"/>
+  <text x="600" y="62" text-anchor="middle" fill="#F0F6FC" font-family="Microsoft YaHei, PingFang SC, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">AI 不应该记住对话。AI 应该记住项目。</text>
+  <text x="600" y="102" text-anchor="middle" fill="#8B949E" font-family="Microsoft YaHei, PingFang SC, Segoe UI, Arial, sans-serif" font-size="19">PBDD 将临时请求转化为持久项目记忆和有纪律的工程流程。</text>
+
+  <defs>
+    <linearGradient id="brain" x1="445" y1="145" x2="755" y2="323" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2F81F7"/>
+      <stop offset="1" stop-color="#3FB950"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="200%" height="200%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <g font-family="Microsoft YaHei, PingFang SC, Segoe UI, Arial, sans-serif" filter="url(#shadow)">
+    <rect x="60" y="170" width="180" height="88" rx="18" fill="#161B22" stroke="#30363D"/>
+    <text x="150" y="207" text-anchor="middle" fill="#F0F6FC" font-size="22" font-weight="700">用户请求</text>
+    <text x="150" y="235" text-anchor="middle" fill="#8B949E" font-size="15">增加退款能力</text>
+
+    <rect x="305" y="170" width="160" height="88" rx="18" fill="#161B22" stroke="#30363D"/>
+    <text x="385" y="207" text-anchor="middle" fill="#F0F6FC" font-size="22" font-weight="700">事件</text>
+    <text x="385" y="235" text-anchor="middle" fill="#8B949E" font-size="15">功能事件</text>
+
+    <rect x="530" y="145" width="205" height="138" rx="24" fill="url(#brain)"/>
+    <text x="632" y="198" text-anchor="middle" fill="#FFFFFF" font-size="25" font-weight="800">项目大脑</text>
+    <text x="632" y="230" text-anchor="middle" fill="#E6EDF3" font-size="15">功能、任务、风险</text>
+    <text x="632" y="252" text-anchor="middle" fill="#E6EDF3" font-size="15">决策、时间线、健康度</text>
+
+    <rect x="800" y="170" width="160" height="88" rx="18" fill="#161B22" stroke="#30363D"/>
+    <text x="880" y="207" text-anchor="middle" fill="#F0F6FC" font-size="22" font-weight="700">工作流</text>
+    <text x="880" y="235" text-anchor="middle" fill="#8B949E" font-size="15">规划 -> 构建 -> 测试</text>
+
+    <rect x="1015" y="170" width="125" height="88" rx="18" fill="#161B22" stroke="#30363D"/>
+    <text x="1078" y="207" text-anchor="middle" fill="#F0F6FC" font-size="22" font-weight="700">代码</text>
+    <text x="1078" y="235" text-anchor="middle" fill="#8B949E" font-size="15">带着记忆</text>
+  </g>
+
+  <g stroke="#8B949E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M246 214H294"/>
+    <path d="M286 206L294 214L286 222"/>
+    <path d="M471 214H519"/>
+    <path d="M511 206L519 214L511 222"/>
+    <path d="M742 214H790"/>
+    <path d="M782 206L790 214L782 222"/>
+    <path d="M966 214H1005"/>
+    <path d="M997 206L1005 214L997 222"/>
+  </g>
+
+  <g font-family="Microsoft YaHei, PingFang SC, Segoe UI, Arial, sans-serif" font-size="15" fill="#8B949E">
+    <text x="600" y="350" text-anchor="middle">对话是临时的。项目是长期的。</text>
+  </g>
+</svg>
